@@ -1,0 +1,17 @@
+{
+  "name": "day2",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "start:dev": "nodemon",
+    "start": "node build",
+    "prebuild": "tsc",
+    "build": "copyfiles -f yarn.lock package.json .yarnrc ./build",
+    "clean": "rimraf build"
+  },
+  "devDependencies": {},
+  "engines": {
+    "npm": "Please use yarn"
+  }
+}
