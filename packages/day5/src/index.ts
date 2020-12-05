@@ -13,13 +13,12 @@ function computeChallenge1(seats: string[]): number {
 }
 
 function computeChallenge2(seats: string[]): number {
-  const [mySeat] = seats
-    .map(getSeatId)
-    .sort((a, b) => a - b)
-    .filter((seat, index, arr) => {
-      return seat === arr[index + 1] - 2;
-    });
-  return mySeat + 1;
+  const missingSeat =
+    seats
+      .map(getSeatId)
+      .sort((a, b) => a - b)
+      .find((seat, index, arr) => seat + 2 === arr[index + 1]) ?? -2;
+  return missingSeat + 1;
 }
 
 async function main(): Promise<number[]> {
