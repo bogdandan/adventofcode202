@@ -64,4 +64,3 @@ async function main(): Promise<number[]> {
 }
 
 main().then(console.log).catch(console.error);
-
