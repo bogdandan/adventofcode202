@@ -12,7 +12,6 @@ function readInput(filename: string): number[] {
 }
 
 function computeChallenge1(values: number[]): number {
-  values.unshift(0);
   const jolts: Record<number, number[]> = { 1: [], 2: [], 3: [] };
 
   values.forEach((jolt, index, arr) => {
@@ -27,13 +26,37 @@ function computeChallenge1(values: number[]): number {
   return jolts[1].length * jolts[3].length;
 }
 
+function tribonacci(v: number): number {
+  let result = 1;
+  for (let index = 1; index < v; ++index) {
+    result += index;
+  }
+
+  return result;
+}
+
 function computeChallenge2(values: number[]): number {
-  return 0;
+  const result = values
+    .map((value, index, arr) => {
+      if (index === arr.length - 1) {
+        return 3;
+      } else {
+        return arr[index + 1] - value;
+      }
+    })
+    .join('')
+    .split('3')
+    .filter((values) => values.length)
+    .reduce((acc, value) => {
+      return acc * tribonacci(value.length);
+    }, 1);
+  return result;
 }
 
 async function main(): Promise<number[]> {
   const fileName = typeof process.env.FILE === 'string' ? process.env.FILE : 'test';
   const result = readInput(fileName);
+  result.unshift(0);
   const challenge1 = computeChallenge1(result);
   const challenge2 = computeChallenge2(result);
   return [challenge1, challenge2];
